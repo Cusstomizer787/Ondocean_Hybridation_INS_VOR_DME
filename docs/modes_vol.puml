@@ -1,0 +1,84 @@
+@startuml Modes_Vol_Detection
+
+skinparam state {
+    BackgroundColor<<Calme>> #C8E6C9
+    BackgroundColor<<Modere>> #FFF9C4
+    BackgroundColor<<Agressif>> #FFCCBC
+    BorderColor #424242
+    FontSize 11
+}
+
+[*] --> Croisiere
+
+state "CROISIÈRE\nRECTILIGNE" as Croisiere <<Calme>> {
+    Croisiere : **Critères:**
+    Croisiere : |ω_z| < 0.002 rad/s
+    Croisiere : |a_long| < 0.2 m/s²
+    Croisiere : 
+    Croisiere : **Paramètres EKF:**
+    Croisiere : • Seuil gating: 9.21
+    Croisiere : • Q_vitesse: 0.5 m²/s³
+    Croisiere : • Contrainte V: NON
+}
+
+state "VIRAGE\nMODÉRÉ" as VirageModere <<Modere>> {
+    VirageModere : **Critères:**
+    VirageModere : 0.002 < |ω_z| < 0.01 rad/s
+    VirageModere : OU 0.2 < |a_long| < 0.5 m/s²
+    VirageModere : 
+    VirageModere : **Paramètres EKF:**
+    VirageModere : • Seuil gating: 15.0
+    VirageModere : • Q_vitesse: 2.0 m²/s³
+    VirageModere : • Contrainte V: OUI (si ΔV<1.0)
+}
+
+state "MANŒUVRE\nAGRESSIVE" as ManoeuvreAggressive <<Agressif>> {
+    ManoeuvreAggressive : **Critères:**
+    ManoeuvreAggressive : |ω_z| > 0.01 rad/s
+    ManoeuvreAggressive : OU |a_long| > 0.5 m/s²
+    ManoeuvreAggressive : 
+    ManoeuvreAggressive : **Paramètres EKF:**
+    ManoeuvreAggressive : • Seuil gating: 25.0
+    ManoeuvreAggressive : • Q_vitesse: 2.0 m²/s³
+    ManoeuvreAggressive : • Contrainte V: NON
+}
+
+Croisiere --> VirageModere : |ω_z| > 0.002\nOU |a_long| > 0.2
+VirageModere --> Croisiere : |ω_z| < 0.002\nET |a_long| < 0.2
+
+VirageModere --> ManoeuvreAggressive : |ω_z| > 0.01\nOU |a_long| > 0.5
+ManoeuvreAggressive --> VirageModere : |ω_z| < 0.01\nET |a_long| < 0.5
+
+Croisiere --> ManoeuvreAggressive : |ω_z| > 0.01\nOU |a_long| > 0.5
+ManoeuvreAggressive --> Croisiere : |ω_z| < 0.002\nET |a_long| < 0.2
+
+note right of Croisiere
+  **Scénarios typiques:**
+  - Vol en palier
+  - Montée/descente douce
+  - Ligne droite
+end note
+
+note right of VirageModere
+  **Scénarios typiques:**
+  - Virage coordonné standard
+  - Arc circulaire (scénario 2)
+  - Accélération modérée
+end note
+
+note right of ManoeuvreAggressive
+  **Scénarios typiques:**
+  - Virage serré (R=2000m)
+  - Forte accélération/décélération
+  - Transition rapide (scénario 3)
+end note
+
+note bottom
+  **Adaptation automatique:**
+  Le système détecte le mode de vol en temps réel
+  et ajuste les paramètres EKF en conséquence.
+  
+  **Pas de configuration manuelle requise.**
+end note
+
+@enduml

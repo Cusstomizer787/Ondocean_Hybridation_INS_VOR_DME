@@ -1,0 +1,144 @@
+@startuml Architecture_INS_VOR_DME
+
+!define CORE_COLOR #E8F4F8
+!define DATA_COLOR #FFF4E6
+!define ALGO_COLOR #E8F5E9
+!define VIZ_COLOR #F3E5F5
+
+package "Configuration" <<Rectangle>> DATA_COLOR {
+    class ParametresSimulation {
+        +duree_simulation: float
+        +dt_imu: float
+        +dt_vor_dme: float
+        +altitude_vol: float
+    }
+    
+    class ParametresINS {
+        +gyro_biais_initial: float
+        +accel_biais_initial: float
+        +gyro_sigma_bruit: float
+        +accel_sigma_bruit: float
+        +gyro_tau_c: float
+        +accel_tau_c: float
+    }
+    
+    class ParametresVORDME {
+        +sigma_vor: float
+        +sigma_dme: float
+    }
+    
+    class ParametresEKF {
+        +P0: ndarray
+        +R_vor: float
+        +R_dme: float
+        +seuil_gating: float
+    }
+}
+
+package "Modèles Physiques" <<Rectangle>> CORE_COLOR {
+    class Station {
+        +id: int
+        +N: float
+        +E: float
+        +type: str
+        --
+        +distance_to(N, E): float
+        +azimuth_to(N, E): float
+    }
+    
+    class ModelesDynamique {
+        {static} +dynamique_ins(x, u_gyro, u_accel, dt, params): ndarray
+        {static} +jacobienne_F(x, u_gyro, u_accel, dt, params): ndarray
+        {static} +matrice_Q(dt, params, omega_z): ndarray
+        --
+        Note: Contrainte douce adaptative
+        Note: Q adaptatif selon virage
+    }
+    
+    class ModelesMesure {
+        {static} +modele_mesure_vor(x, station): float
+        {static} +modele_mesure_dme(x, station): float
+        {static} +jacobienne_H_vor(x, station): ndarray
+        {static} +jacobienne_H_dme(x, station): ndarray
+    }
+}
+
+package "Algorithmes" <<Rectangle>> ALGO_COLOR {
+    class EKF {
+        -x: ndarray [8]
+        -P: ndarray [8,8]
+        -V_mag_prev: float
+        -a_long_current: float
+        -historique: dict
+        --
+        +prediction(u_gyro, u_accel, dt)
+        +update_vor(z_vor, station): bool
+        +update_dme(z_dme, station): bool
+        +calculer_seuil_gating(omega_z, a_long, S): float
+        --
+        Note: Gating adaptatif hybride
+        Note: Détection manœuvre automatique
+    }
+    
+    class SimulateurINS {
+        {static} +simuler_ins(verite, params_ins): dict
+        --
+        Note: Modèle Gauss-Markov pour biais
+        Note: Bruits blancs gaussiens
+    }
+    
+    class GenerateurTrajectoire {
+        {static} +generer_verite_scenario_1(params): dict
+        {static} +generer_verite_scenario_2(params): dict
+        {static} +generer_verite_scenario_3(params): dict
+        --
+        Note: Scénario 1: Approche radiale
+        Note: Scénario 2: Arc circulaire
+        Note: Scénario 3: Transit multi-stations
+    }
+}
+
+package "Métriques & Visualisation" <<Rectangle>> VIZ_COLOR {
+    class Metriques {
+        {static} +calculer_erreur_2D(verite, traj, idx): float
+        {static} +calculer_erreur_3D(verite, traj, idx): float
+        {static} +calculer_amelioration(err_ins, err_ekf): float
+        {static} +calculer_metriques_complete(verite, traj_ins, traj_ekf): dict
+    }
+    
+    class Visualisation {
+        {static} +plot_trajectoires_2D(verite, traj_ins, traj_ekf, stations)
+        {static} +plot_erreurs(verite, traj_ins, traj_ekf)
+        {static} +plot_innovations(ekf)
+        {static} +animer_trajectoires(verite, traj_ins, traj_ekf, stations)
+    }
+}
+
+' Relations
+EKF --> ModelesDynamique : utilise
+EKF --> ModelesMesure : utilise
+EKF --> ParametresEKF : configure
+SimulateurINS --> ModelesDynamique : utilise
+SimulateurINS --> ParametresINS : configure
+GenerateurTrajectoire --> ParametresSimulation : configure
+Metriques --> Visualisation : données pour
+ModelesMesure --> Station : mesure vers
+
+note right of EKF
+  **Innovations clés:**
+  - Gating adaptatif hybride
+  - Q adaptatif selon manœuvre
+  - Contrainte douce sur vitesse
+  - Détection automatique de mode
+end note
+
+note right of ModelesDynamique
+  **Modèle INS 8D:**
+  [N, E, h, V_N, V_E, ψ, b_g, b_a]
+  
+  **Adaptations:**
+  - Contrainte magnitude vitesse
+  - Q variable selon ω_z
+end note
+
+@enduml

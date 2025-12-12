@@ -1,0 +1,129 @@
+@startuml Flux_EKF_Adaptatif
+
+skinparam activity {
+    BackgroundColor<<Prediction>> #E3F2FD
+    BackgroundColor<<Correction>> #E8F5E9
+    BackgroundColor<<Adaptatif>> #FFF9C4
+    BorderColor #1976D2
+    FontSize 11
+}
+
+start
+
+:Initialisation EKF;
+note right
+  x0 = [N, E, h, V_N, V_E, ψ, b_g, b_a]
+  P0 = matrice covariance initiale
+  V_mag_prev = ||V||
+end note
+
+repeat
+
+  :Réception mesures IMU\n(u_gyro, u_accel);
+  
+  partition "**PRÉDICTION**" <<Prediction>> {
+    
+    :Propagation état\nx = dynamique_ins(x, u_gyro, u_accel, dt);
+    note right
+      **Contrainte douce adaptative:**
+      SI virage ET ΔV < 1.0 m/s:
+        Maintenir ||V|| constant (80%)
+    end note
+    
+    :Calcul accélération longitudinale\na_long = (||V|| - V_mag_prev) / dt;
+    <<Adaptatif>>
+    
+    :Calcul jacobienne F;
+    
+    :Calcul ω_z corrigé\nω_z = u_gyro - b_g;
+    <<Adaptatif>>
+    
+    :Calcul matrice Q adaptative\nQ = matrice_Q(dt, params, ω_z);
+    note right
+      **Q adaptatif:**
+      SI |ω_z| > 0.002:
+        Q_vitesse = 2.0 (virage)
+      SINON:
+        Q_vitesse = 0.5 (rectiligne)
+    end note
+    <<Adaptatif>>
+    
+    :Propagation covariance\nP = F·P·F^T + Q;
+    
+  }
+  
+  :Réception mesure VOR/DME ?;
+  
+  if (Mesure disponible ?) then (oui)
+  
+    partition "**CORRECTION**" <<Correction>> {
+      
+      :Prédiction mesure\nz_pred = h(x, station);
+      
+      :Calcul innovation\ny = z - z_pred;
+      note right
+        Normalisation angulaire
+        pour VOR: y ∈ [-π, π]
+      end note
+      
+      :Calcul jacobienne H;
+      
+      :Calcul covariance innovation\nS = H·P·H^T + R;
+      
+      :Calcul seuil gating adaptatif\nseuil = calculer_seuil_gating(ω_z, a_long, S);
+      <<Adaptatif>>
+      
+      note right
+        **Gating adaptatif hybride:**
+        
+        1. Détection manœuvre:
+           - Agressive: |ω_z|>0.01 OU |a_long|>0.5
+           - Modérée: |ω_z|>0.002 OU |a_long|>0.2
+           - Calme: sinon
+        
+        2. Seuils base:
+           - Agressive: 25.0
+           - Modérée: 15.0
+           - Calme: 9.21
+        
+        3. Adaptation covariance:
+           facteur = 1 + 0.05·trace(S)/dim(S)
+           seuil_final = seuil_base · facteur
+        
+        4. Limites: [9.21, 30.0]
+      end note
+      
+      :Test gating\nd² = y^T·S^(-1)·y;
+      
+      if (d² < seuil ?) then (oui - acceptée)
+        
+        :Calcul gain Kalman\nK = P·H^T·S^(-1);
+        
+        :Correction état\nx = x + K·y;
+        
+        :Correction covariance\nP = (I - K·H)·P;
+        
+        :Sauvegarder innovation\n(acceptée);
+        
+      else (non - rejetée)
+        
+        :Sauvegarder innovation\n(rejetée);
+        
+      endif
+      
+    }
+    
+  else (non)
+    :Pas de correction;
+  endif
+  
+  :Sauvegarder historique\n(x, P, innovations);
+
+repeat while (Fin simulation ?) is (non)
+->oui;
+
+:Retourner trajectoire EKF\n+ historique;
+
+stop
+
+@enduml

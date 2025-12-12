@@ -1,0 +1,54 @@
+{
+  "1": {
+    "nom": "Approche radiale avec accelerations",
+    "test_accel": true,
+    "test_derive": true,
+    "test_amelioration": true,
+    "a_N_max": 1.25,
+    "a_E_max": 2.5,
+    "omega_max": 0.05,
+    "err_ins": 12969.570378909571,
+    "err_ekf": 317.22914234070726,
+    "amelioration": 97.55405049610148,
+    "n_updates": 3768
+  },
+  "2": {
+    "nom": "Arc circulaire",
+    "test_accel": true,
+    "test_derive": true,
+    "test_amelioration": true,
+    "a_N_max": 0.0,
+    "a_E_max": 0.45,
+    "omega_max": 0.003,
+    "err_ins": 314170.37644518644,
+    "err_ekf": 129.67229602560775,
+    "amelioration": 99.95872548599495,
+    "n_updates": 4148
+  },
+  "3": {
+    "nom": "Transit multi-stations avec virages",
+    "test_accel": true,
+    "test_derive": true,
+    "test_amelioration": true,
+    "a_N_max": 0.8,
+    "a_E_max": 3.2,
+    "omega_max": 0.04,
+    "err_ins": 26996.825230772796,
+    "err_ekf": 125.86354975390746,
+    "amelioration": 99.5337838850383,
+    "n_updates": 3163
+  },
+  "4": {
+    "nom": "Trajectoire reelle GPS",
+    "test_accel": true,
+    "test_derive": true,
+    "test_amelioration": false,
+    "a_N_max": 2510.987365556409,
+    "a_E_max": 2145.2392288779797,
+    "omega_max": 15.801194742505816,
+    "err_ins": 41945.954992539686,
+    "err_ekf": 175331.3798627934,
+    "amelioration": -317.99353452311914,
+    "n_updates": 28
+  }
+}
