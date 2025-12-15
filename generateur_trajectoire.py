@@ -156,9 +156,10 @@ def generer_verite_scenario_2(params_sim):
     
     Description:
     - Trajectoire circulaire rayon 50 km autour de (0, 0)
+    - Virage coordonne a DROITE (sens horaire, omega < 0)
     - Vitesse tangentielle 150 m/s
     - Altitude constante 3000 m
-    - Acceleration centripete vers centre
+    - Acceleration centripete vers interieur (droite)
     
     Parametres:
     -----------
@@ -180,9 +181,9 @@ def generer_verite_scenario_2(params_sim):
     # Parametres cercle
     R = 50000.0  # Rayon (m)
     V_mag = 150.0  # Vitesse tangentielle (m/s)
-    omega = V_mag / R  # Vitesse angulaire (rad/s)
+    omega = -V_mag / R  # Vitesse angulaire NEGATIVE (virage droite, sens horaire)
     
-    # Position circulaire
+    # Position circulaire (virage droite)
     theta = omega * t
     N = R * np.cos(theta)
     E = R * np.sin(theta)
@@ -192,18 +193,18 @@ def generer_verite_scenario_2(params_sim):
     V_N = -R * omega * np.sin(theta)
     V_E = R * omega * np.cos(theta)
     
-    # Cap (tangent au cercle)
-    psi = theta + np.pi / 2.0
+    # Cap (tangent au cercle, virage droite)
+    psi = theta - np.pi / 2.0
     psi = np.mod(psi + np.pi, 2.0 * np.pi) - np.pi
     
     # Acceleration centripete
     a_c = V_mag**2 / R  # Magnitude acceleration centripete
     
-    # Dans le repere corps (avion), acceleration pointe vers la gauche (interieur virage)
+    # Dans le repere corps (avion), acceleration pointe vers interieur du virage (DROITE)
     # Repere corps: x vers avant, y vers droite
-    # Acceleration centripete pointe vers centre (gauche) donc a_E_corps negatif
+    # Virage droite: acceleration centripete vers droite donc a_E_corps POSITIF
     a_N_corps = np.zeros(N_samples)  # Pas d'acceleration longitudinale
-    a_E_corps = -a_c * np.ones(N_samples)  # Acceleration laterale (vers gauche)
+    a_E_corps = a_c * np.ones(N_samples)  # Acceleration laterale vers droite (virage coordonne)
     
     # Vitesse angulaire constante
     omega_z = omega * np.ones(N_samples)
