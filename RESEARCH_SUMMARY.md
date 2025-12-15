@@ -1,8 +1,8 @@
 # Résumé de Recherche - Analyse Codebase INS + VOR/DME
 
 **Date:** 6 décembre 2025  
-**Auteur:** Nicolas CUSSEAU - ENSTA ILEMS  
-**Projet:** SAFRAN - Hybridation INS + VOR/DME avec EKF Adaptatif
+**Auteur:** Nicolas CUSSEAU - Guillaume COSNARD - ENSTA  
+**Projet:** Hybridation INS + VOR/DME avec EKF Adaptatif
 
 ---
 

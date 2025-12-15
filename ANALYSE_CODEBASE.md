@@ -858,6 +858,6 @@ Couverture estimée: 85%
 
 ---
 
-**Auteur:** Nicolas CUSSEAU - ENSTA ILEMS  
-**Projet:** SAFRAN - Hybridation INS + VOR/DME  
+**Auteur:** Nicolas CUSSEAU - Guillaume COSNARD - ENSTA  
+**Projet:** Hybridation INS + VOR/DME  
 **Date:** Décembre 2025

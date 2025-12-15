@@ -2,7 +2,7 @@
 
 **Titre:** Hybridation INS + VOR/DME avec EKF Adaptatif  
 **Sous-titre:** Filtre de Kalman Étendu pour Navigation Aérienne  
-**Auteur:** Nicolas CUSSEAU - ENSTA ILEMS  
+**Auteur:** Nicolas CUSSEAU - Guillaume COSNARD - ENSTA  
 **Date:** Décembre 2025  
 **Durée:** 15-20 minutes
 
@@ -14,13 +14,11 @@
 - Titre principal: "Hybridation INS + VOR/DME avec EKF Adaptatif"
 - Sous-titre: "Filtre de Kalman Étendu pour Navigation Aérienne"
 - Auteur: Nicolas CUSSEAU
-- Institution: ENSTA Bretagne - ILEMS
-- Partenaire: SAFRAN
+- Institution: ENSTA
 - Date: Décembre 2025
 
 **Visuel:**
 - Logo ENSTA
-- Logo SAFRAN
 - Image avion ou centrale inertielle
 
 ---
@@ -341,7 +339,7 @@ seuil_final ∈ [9.21, 30.0]
 **Visuel:**
 - Icônes applications
 - Schéma perspectives
-- Logo ENSTA + SAFRAN
+- Logo ENSTA
 
 ---
 

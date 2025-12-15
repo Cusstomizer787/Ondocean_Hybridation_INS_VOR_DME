@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 *.so
 .Python
+*.pyc
 
 # Virtual environments
 .venv/
@@ -28,6 +29,26 @@ env/
 animations/
 *.pkl
 *.pickle
+
+# Large notebook outputs (> 100MB)
+simulation_ins_vor_dme.ipynb
+
+# Documentation temporaire
+ANALYSE_CODEBASE.md
+EXECUTION_SUMMARY.md
+GIT_PUSH_SUCCESS.md
+GUIDE_EXECUTION_VALIDATION.md
+INSTRUCTIONS_ANIMATION.md
+OPTIONS_6_10_SUMMARY.md
+PRESENTATION_OUTLINE.md
+README_TESTS.md
+RESEARCH_IMU_CLASSES_5G.md
+RESEARCH_SUMMARY.md
+RESULTATS_VALIDATION.md
+TESTS_QUALITY_README.md
+
+# Test results
+resultats_tests_scenarios.json
 
 # OS
 .DS_Store

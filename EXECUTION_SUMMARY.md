@@ -1,8 +1,8 @@
 # Résumé d'Exécution - Options 1 & 8
 
 **Date:** 6 décembre 2025, 23:00 UTC+01:00  
-**Auteur:** Nicolas CUSSEAU - ENSTA ILEMS  
-**Projet:** SAFRAN - Hybridation INS + VOR/DME
+**Auteur:** Nicolas CUSSEAU - Guillaume COSNARD - ENSTA  
+**Projet:** Hybridation INS + VOR/DME
 
 ---
 
@@ -188,7 +188,7 @@ numero_scenario = 1
 **Étape 3: Ajouter visuels**
 - Diagrammes UML (docs/*.png - à générer)
 - Graphiques résultats (depuis notebook)
-- Logos ENSTA + SAFRAN
+- Logos ENSTA
 
 **Étape 4: Finaliser**
 - Vérifier cohérence visuelle

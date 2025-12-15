@@ -154,13 +154,13 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
 ## Contributeurs
 
-- Nicolas CUSSEAU - ENSTA Bretagne - Développement initial et v1.1
+- Nicolas CUSSEAU - Guillaume COSNARD - ENSTA - Développement
 
 ---
 
 ## Licence
 
-Projet académique ENSTA Bretagne - Usage éducatif uniquement
+Projet académique ENSTA - Usage éducatif uniquement
 
 ---
 

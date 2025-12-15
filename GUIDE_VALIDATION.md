@@ -10,7 +10,7 @@ Ce guide détaille les étapes de validation des scénarios corrigés.
 
 **Commande:**
 ```bash
-cd C:\Users\ncuss\Desktop\ENSTA\Projet_SAFRAN\Codebase
+cd C:\Users\ncuss\Desktop\ENSTA\Ondocean_Hybridation_INS_VOR_DME_V1
 python test_scenarios.py
 ```
 
@@ -132,7 +132,7 @@ amelioration_cep95 = (1 - stats_ekf['CEP95'] / stats_ins['CEP95']) * 100
 ### Test automatisé (recommandé)
 
 ```bash
-cd C:\Users\ncuss\Desktop\ENSTA\Projet_SAFRAN\Codebase
+cd C:\Users\ncuss\Desktop\ENSTA\Ondocean_Hybridation_INS_VOR_DME_V1
 python test_scenarios.py
 ```
 
@@ -245,7 +245,7 @@ ModuleNotFoundError: No module named 'parametres'
 
 **Solution:**
 ```bash
-cd C:\Users\ncuss\Desktop\ENSTA\Projet_SAFRAN\Codebase
+cd C:\Users\ncuss\Desktop\ENSTA\Ondocean_Hybridation_INS_VOR_DME_V1
 python test_scenarios.py
 ```
 

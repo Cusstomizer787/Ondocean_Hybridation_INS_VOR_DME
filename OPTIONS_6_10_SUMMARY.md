@@ -1,7 +1,7 @@
 # Résumé Options 6 & 10 - Tests et Qualité
 
 **Date:** 6 décembre 2025, 23:11 UTC+01:00  
-**Auteur:** Nicolas CUSSEAU - ENSTA ILEMS
+**Auteur:** Nicolas CUSSEAU - Guillaume COSNARD - ENSTA
 
 ---
 

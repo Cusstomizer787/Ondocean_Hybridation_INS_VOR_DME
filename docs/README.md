@@ -134,5 +134,5 @@ Pour l'analyse détaillée du code, voir:
 
 ## Auteur
 
-Nicolas CUSSEAU - ENSTA ILEMS
-Projet SAFRAN - Décembre 2025
+Nicolas CUSSEAU - Guillaume COSNARD - ENSTA
+Décembre 2025

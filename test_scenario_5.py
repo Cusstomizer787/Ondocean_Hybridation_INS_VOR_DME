@@ -5,7 +5,7 @@ Ce script teste la generation de trajectoire du scenario 5
 qui simule un aeronef transitant entre 5 balises reelles:
 DJL, RLP, EPL, LUL, LXI
 
-Auteur: Nicolas CUSSEAU - ENSTA Bretagne
+Auteur: Nicolas CUSSEAU - Guillaume COSNARD - ENSTA
 Date: Decembre 2025
 """
 

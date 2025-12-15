@@ -1,8 +1,8 @@
 # Résultats de Validation - EKF Adaptatif INS + VOR/DME
 
 **Date:** 7 décembre 2025  
-**Auteur:** Nicolas CUSSEAU - ENSTA ILEMS  
-**Projet:** SAFRAN - Hybridation INS + VOR/DME
+**Auteur:** Nicolas CUSSEAU - Guillaume COSNARD - ENSTA  
+**Projet:** Hybridation INS + VOR/DME
 
 ---
 

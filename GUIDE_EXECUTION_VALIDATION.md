@@ -12,7 +12,7 @@
 
 **Actions:**
 1. Ouvrir Jupyter Notebook ou JupyterLab
-2. Naviguer vers: `C:\Users\ncuss\Desktop\ENSTA\Projet_SAFRAN\Codebase`
+2. Naviguer vers: `C:\Users\ncuss\Desktop\ENSTA\Ondocean_Hybridation_INS_VOR_DME_V1`
 3. Ouvrir: `simulation_ins_vor_dme.ipynb`
 4. Vérifier que le kernel Python est actif (coin supérieur droit)
 
@@ -65,7 +65,7 @@ Mesures DME: _____ acceptées, _____ rejetées
 1. Clic droit sur le graphique
 2. "Save Image As..." ou "Enregistrer l'image sous..."
 3. Nom: `scenario_1_trajectoire.png`
-4. Emplacement: `C:\Users\ncuss\Desktop\ENSTA\Projet_SAFRAN\Codebase\`
+4. Emplacement: `C:\Users\ncuss\Desktop\ENSTA\Ondocean_Hybridation_INS_VOR_DME_V1\`
 
 #### 2.5 Vérification Rapide
 

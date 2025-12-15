@@ -130,7 +130,7 @@ git log --oneline --graph --all
 
 ## Configuration Locale
 
-**Dépôt local:** `C:\Users\ncuss\Desktop\ENSTA\Projet_SAFRAN\Codebase`
+**Dépôt local:** `C:\Users\ncuss\Desktop\ENSTA\Ondocean_Hybridation_INS_VOR_DME_V1`
 
 **Remote configuré:**
 - URL: https://github.com/Cusstomizer787/Ondocean_Hybridation_INS_VOR_DME.git

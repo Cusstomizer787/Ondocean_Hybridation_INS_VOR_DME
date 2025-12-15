@@ -101,7 +101,7 @@ pip install numpy scipy matplotlib
 
 **Mauvais répertoire:**
 ```bash
-cd C:\Users\ncuss\Desktop\ENSTA\Projet_SAFRAN\Codebase
+cd C:\Users\ncuss\Desktop\ENSTA\Ondocean_Hybridation_INS_VOR_DME_V1
 ```
 
 **Tests échouent:**

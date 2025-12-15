@@ -28,7 +28,7 @@ L'objectif est de démontrer l'apport de la fusion de données via un **filtre d
 ### Auteur
 
 **Nicolas CUSSEAU**  
-ENSTA Bretagne - Projet SAFRAN  
+Nicolas CUSSEAU - Guillaume COSNARD - ENSTA  
 Décembre 2025
 
 ---
@@ -448,7 +448,7 @@ pip install numpy scipy matplotlib
 **1. Ouvrir le notebook:**
 
 ```bash
-cd C:\Users\ncuss\Desktop\ENSTA\Projet_SAFRAN\Codebase
+cd C:\Users\ncuss\Desktop\ENSTA\Ondocean_Hybridation_INS_VOR_DME_V1
 jupyter notebook simulation_ins_vor_dme.ipynb
 ```
 
@@ -636,9 +636,9 @@ params_sim.duree_simulation = 600.0  # 10 min au lieu de 20
 
 ## Licence
 
-Projet académique ENSTA Bretagne - Usage éducatif uniquement
+Projet académique ENSTA - Usage éducatif uniquement
 
 ## Contact
 
-Nicolas CUSSEAU - ENSTA Bretagne  
-Projet SAFRAN - Décembre 2025
+Nicolas CUSSEAU - Guillaume COSNARD - ENSTA  
+Décembre 2025

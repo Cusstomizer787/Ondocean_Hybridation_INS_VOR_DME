@@ -1,8 +1,28 @@
 """
 Module de parametres pour la simulation INS + VOR/DME
 
-Contient toutes les classes de configuration et fonctions de chargement
-des parametres par defaut.
+Ce module centralise tous les parametres de configuration de la simulation:
+- Parametres temporels (frequences d'echantillonnage, duree)
+- Parametres INS (MEMS aeronautique: gyroscopes et accelerometres)
+- Parametres VOR/DME (precision, biais, portee)
+- Parametres EKF (covariances, gating, metriques)
+- Configuration des stations au sol
+
+Classes:
+--------
+ParametresSimulation : Configuration temporelle
+ParametresINS : Caracteristiques centrale inertielle MEMS
+ParametresVORDME : Performances stations VOR/DME
+ParametresEKF : Reglages filtre de Kalman
+Station : Representation d'une station VOR/DME
+
+Fonctions:
+----------
+charger_parametres_defaut() : Charge configuration par defaut
+creer_stations_sol() : Cree stations synthétiques (geometrie triangle)
+creer_stations_reelles() : Cree stations reelles France (DJL, RLP, LXI, EPL, LUL)
+
+Auteur: Nicolas CUSSEAU & Guillaume COSNARD - ENSTA Paris - 2025
 """
 
 import numpy as np
@@ -18,17 +38,32 @@ class ParametresSimulation:
 
 
 class ParametresINS:
-    """Parametres de la centrale inertielle (MEMS aeronautique)"""
+    """
+    Parametres de la centrale inertielle (MEMS aeronautique)
+    
+    Classe Tactical/Industrial Grade adaptee pour:
+    - Aviation legere et generale
+    - UAV (drones militaires)
+    - Applications marines
+    
+    Performances typiques:
+    - Derive position INS seule: ~44 NM/h
+    - Necessite hybridation obligatoire (GNSS, VOR/DME)
+    
+    Modeles de biais:
+    - Gauss-Markov premier ordre: db/dt = -beta*b + w
+    - Correlation temporelle: tau = 3600 s (1 heure)
+    """
     def __init__(self):
         # Gyroscope
-        self.gyro_arw = 0.00436  # Bruit ARW (rad/sqrt(s))
-        self.gyro_biais_init = 0.00524  # Biais initial (rad/s)
+        self.gyro_arw = 0.00436  # Angular Random Walk (rad/sqrt(s)) = 0.25 deg/sqrt(h)
+        self.gyro_biais_init = 0.00524  # Biais initial (rad/s) = 1.08 deg/h
         self.gyro_tau_c = 3600.0  # Temps correlation Gauss-Markov (s)
         self.gyro_sigma_bruit = 8.73e-5  # Ecart-type bruit processus (rad/s^2)
         
         # Accelerometre
-        self.accel_bruit = 0.00147  # Bruit (m/s^2/sqrt(Hz))
-        self.accel_biais_init = 0.0294  # Biais initial (m/s^2)
+        self.accel_bruit = 0.00147  # Bruit blanc (m/s^2/sqrt(Hz)) = 1.47 mg/sqrt(Hz)
+        self.accel_biais_init = 0.0294  # Biais initial (m/s^2) = 3 mg
         self.accel_tau_c = 3600.0  # Temps correlation Gauss-Markov (s)
         self.accel_sigma_bruit = 4.9e-4  # Ecart-type bruit processus (m/s^3)
 

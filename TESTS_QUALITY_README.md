@@ -1,7 +1,7 @@
 # Tests Unitaires et Qualité Code
 
 **Projet:** INS + VOR/DME avec EKF Adaptatif  
-**Auteur:** Nicolas CUSSEAU - ENSTA ILEMS
+**Auteur:** Nicolas CUSSEAU - Guillaume COSNARD - ENSTA
 
 ---
 

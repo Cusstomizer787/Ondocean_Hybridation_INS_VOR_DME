@@ -1,7 +1,7 @@
 # Research: Configuration Classes IMU et Extension 5G Portuaire
 
 **Date:** 7 décembre 2025  
-**Auteur:** Nicolas CUSSEAU - ENSTA ILEMS  
+**Auteur:** Nicolas CUSSEAU - Guillaume COSNARD - ENSTA  
 **Contexte:** Extension système INS + VOR/DME vers multi-classes IMU et 5G portuaire
 
 ---
