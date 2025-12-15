@@ -7,15 +7,14 @@
 
 **Simulation avancée d'hybridation centrale inertielle (INS) et moyens de radionavigation terrestres (VOR/DME) pour aéronefs, avec filtrage de Kalman étendu (EKF), CMKF et IMM.**
 
-## 👥 Auteurs
+## Auteurs
 
-**Nicolas CUSSEAU** & **Guillaume COSNARD**  
-ENSTA Paris - Décembre 2025  
-Projet OndOcean Maritime & Remote ID
+Nicolas CUSSEAU & Guillaume COSNARD  
+ENSTA - Décembre 2025
 
 ---
 
-## 📋 Description
+## Description
 
 Ce projet implémente une simulation complète d'un système de navigation aéronautique hybride combinant:
 
@@ -25,10 +24,10 @@ Ce projet implémente une simulation complète d'un système de navigation aéro
 
 ### Objectifs
 
-✅ Comparer les performances INS seule (dead reckoning) vs INS hybridée  
-✅ Démontrer l'apport du filtrage de Kalman pour corriger la dérive inertielle  
-✅ Évaluer différentes architectures de filtrage (EKF, CMKF, IMM)  
-✅ Tester sur trajectoires réalistes et données GPS réelles
+- Comparer les performances INS seule (dead reckoning) vs INS hybridée
+- Démontrer l'apport du filtrage de Kalman pour corriger la dérive inertielle
+- Évaluer différentes architectures de filtrage (EKF, CMKF, IMM)
+- Tester sur trajectoires réalistes et données GPS réelles
 
 ### Classes d'INS
 
@@ -46,39 +45,39 @@ Le projet simule une **INS MEMS Tactical/Industrial Grade** :
 - **Biais gyro**: 1.08 °/h (0.00524 rad/s)
 - **Biais accéléromètre**: 3 mg (0.0294 m/s²)
 
-## 📚 Documentation
+## Documentation
 
 - **[Documentation Complète](DOCUMENTATION_COMPLETE.md)** - Architecture et implémentation détaillée
 - **[Résultats de Référence](RESULTATS_REFERENCE.md)** - Métriques et performances validées
 - **[Guide de Validation](GUIDE_VALIDATION.md)** - Protocoles de test
 - **[Changelog](CHANGELOG.md)** - Historique des versions
 
-## 📁 Structure du Projet
+## Structure du Projet
 
 ```
-📦 Ondocean_Hybridation_INS_VOR_DME_V1/
-├── 📄 parametres.py                    # Configuration globale et classes de paramètres
-├── 📄 modeles_dynamique.py             # Équations d'état, jacobiennes, matrices Q
-├── 📄 stations_sol.py                  # Modèles de mesure VOR/DME et visibilité
-├── 📄 generateur_trajectoire.py        # Génération trajectoires vérité (5 scénarios)
-├── 📄 simulateur_ins.py                # Simulation IMU + intégration strapdown
-├── 📄 ekf.py                           # Extended Kalman Filter avec gating adaptatif
-├── 📄 cmkf.py                          # Constrained Manifold Kalman Filter
-├── 📄 imm.py                           # Interacting Multiple Model (3 modes)
-├── 📄 metriques.py                     # RMSE, CEP, statistiques de performance
-├── 📄 visualisation.py                 # Plots et animations interactives
-├── 📓 simulation_ins_vor_dme.ipynb     # Notebook principal (EKF)
-├── 📓 simulation_ins_vor_dme_cmkf.ipynb # Notebook CMKF
-├── 📓 simulation_ins_vor_dme_imm.ipynb  # Notebook IMM
-├── 📓 estimateur.ipynb                 # Estimateur sur données réelles
-├── 📊 data.csv                         # Données GPS réelles
-├── 🧪 test_*.py                        # Suite de tests unitaires
-├── 📋 requirements.txt                 # Dépendances Python
-├── 📖 README.md                        # Documentation principale
-└── 📚 docs/                            # Documentation détaillée
+Ondocean_Hybridation_INS_VOR_DME_V1/
+├── parametres.py                    # Configuration globale et classes de paramètres
+├── modeles_dynamique.py             # Équations d'état, jacobiennes, matrices Q
+├── stations_sol.py                  # Modèles de mesure VOR/DME et visibilité
+├── generateur_trajectoire.py        # Génération trajectoires vérité (5 scénarios)
+├── simulateur_ins.py                # Simulation IMU + intégration strapdown
+├── ekf.py                           # Extended Kalman Filter avec gating adaptatif
+├── cmkf.py                          # Constrained Manifold Kalman Filter
+├── imm.py                           # Interacting Multiple Model (3 modes)
+├── metriques.py                     # RMSE, CEP, statistiques de performance
+├── visualisation.py                 # Plots et animations interactives
+├── simulation_ins_vor_dme.ipynb     # Notebook principal (EKF)
+├── simulation_ins_vor_dme_cmkf.ipynb # Notebook CMKF
+├── simulation_ins_vor_dme_imm.ipynb  # Notebook IMM
+├── estimateur.ipynb                 # Estimateur sur données réelles
+├── data.csv                         # Données GPS réelles
+├── test_*.py                        # Suite de tests unitaires
+├── requirements.txt                 # Dépendances Python
+├── README.md                        # Documentation principale
+└── docs/                            # Documentation détaillée
 ```
 
-## 🔬 Caractéristiques Techniques
+## Caractéristiques Techniques
 
 ### Modèle d'État (8D)
 
@@ -147,13 +146,13 @@ x = [N, E, h, V_N, V_E, ψ, b_g, b_a]ᵀ
 
 | # | Nom | Description | Durée | Complexité |
 |---|-----|-------------|-------|------------|
-| 1 | Approche radiale | Vol direct vers station 1 | 20 min | ⭐ Faible |
-| 2 | Arc circulaire | Virage 90° autour station 1 | 20 min | ⭐⭐ Moyenne |
-| 3 | Transit multi-stations | Navigation entre 3 stations | 20 min | ⭐⭐⭐ Élevée |
-| 4 | Trajectoire GPS réelle | Données vol réel (data.csv) | Variable | ⭐⭐⭐ Élevée |
-| 5 | Balises réelles France | DJL, RLP, LXI, EPL, LUL | 20 min | ⭐⭐⭐ Élevée |
+| 1 | Approche radiale | Vol direct vers station 1 | 20 min | Faible |
+| 2 | Arc circulaire | Virage 90° autour station 1 | 20 min | Moyenne |
+| 3 | Transit multi-stations | Navigation entre 3 stations | 20 min | Élevée |
+| 4 | Trajectoire GPS réelle | Données vol réel (data.csv) | Variable | Élevée |
+| 5 | Balises réelles France | DJL, RLP, LXI, EPL, LUL | 20 min | Élevée |
 
-## 🚀 Installation
+## Installation
 
 ### Prérequis
 
@@ -196,7 +195,7 @@ scipy>=1.7.0        # Fonctions scientifiques
 matplotlib>=3.4.0   # Visualisation
 ```
 
-## 💻 Utilisation
+## Utilisation
 
 ### Méthode 1 : Jupyter Notebook (Recommandé)
 
@@ -242,36 +241,36 @@ traj_ins = integrer_ins_seule(mesures_imu, x0, params_sim, params_ins)
 # Simuler EKF (voir notebook pour boucle complete)
 ```
 
-## 📊 Résultats de Performance
+## Résultats de Performance
 
 ### Scénario 3 : Transit Multi-Stations (20 min)
 
 | Métrique | INS Seule | INS + EKF | Amélioration |
 |----------|-----------|-----------|--------------|
-| **RMSE 2D** | 31 116 m | 193 m | **99.4%** ✅ |
-| **CEP50** | 27 449 m | 141 m | **99.5%** ✅ |
-| **CEP95** | 54 073 m | 367 m | **99.3%** ✅ |
-| **Erreur max 2D** | 56 264 m | 564 m | **99.0%** ✅ |
+| **RMSE 2D** | 31 116 m | 193 m | **99.4%** |
+| **CEP50** | 27 449 m | 141 m | **99.5%** |
+| **CEP95** | 54 073 m | 367 m | **99.3%** |
+| **Erreur max 2D** | 56 264 m | 564 m | **99.0%** |
 | **RMSE cap** | 23.1° | 105.2° | - |
 
 ### INS Seule (Dead Reckoning)
-- ❌ Dérive importante : ~82 km/h (~44 NM/h)
-- ❌ Erreur finale : 27.5 km après 20 minutes
-- ❌ Inutilisable pour navigation opérationnelle
+- Dérive importante : ~82 km/h (~44 NM/h)
+- Erreur finale : 27.5 km après 20 minutes
+- Inutilisable pour navigation opérationnelle
 
 ### INS + EKF (Hybridée)
-- ✅ Correction efficace par mesures VOR/DME
-- ✅ Précision métrique maintenue
-- ✅ Mesures VOR : 1605 acceptées, 5 rejetées (gating)
-- ✅ Mesures DME : 1610 acceptées, 0 rejetées
+- Correction efficace par mesures VOR/DME
+- Précision métrique maintenue
+- Mesures VOR : 1605 acceptées, 5 rejetées (gating)
+- Mesures DME : 1610 acceptées, 0 rejetées
 
 ### Visualisations Disponibles
-1. 🗺️ **Trajectoires 2D** - Comparaison vérité/INS/EKF avec stations
-2. 📈 **Erreurs temporelles** - Évolution N, E, 2D
-3. 📉 **RMSE glissant** - Fenêtre de 60 secondes
-4. 🎯 **Innovations EKF** - VOR/DME avec seuils de gating
-5. 📊 **Covariance** - Évolution de l'incertitude
-6. 🎬 **Animation** - Trajectoire dynamique (vitesse x50)
+1. **Trajectoires 2D** - Comparaison vérité/INS/EKF avec stations
+2. **Erreurs temporelles** - Évolution N, E, 2D
+3. **RMSE glissant** - Fenêtre de 60 secondes
+4. **Innovations EKF** - VOR/DME avec seuils de gating
+5. **Covariance** - Évolution de l'incertitude
+6. **Animation** - Trajectoire dynamique (vitesse x50)
 
 ## Modifications possibles
 
@@ -330,7 +329,7 @@ def generer_verite_scenario_4(params_sim):
 Si vous utilisez ce code dans vos travaux academiques, veuillez citer:
 
 ```
-CUSSEAU, N. (2025). Simulation INS + VOR/DME avec Filtre de Kalman Etendu.
+CUSSEAU, N. & COSNARD, G. (2025). Simulation INS + VOR/DME avec Filtre de Kalman Etendu.
 ENSTA.
 https://github.com/Cusstomizer787/Ondocean_Hybridation_INS_VOR_DME
 ```
